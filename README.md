@@ -1,20 +1,51 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Care-Centered Value Sensitive Design (CCVSD) Guidebook
 
-# Run and deploy your AI Studio app
+This interactive digital guidebook translates the theoretical framework of **Care-Centered Value Sensitive Design (CCVSD)** into a practical, actionable tool for roboticists, designers, and healthcare engineers.
 
-This contains everything you need to run your app locally.
+It bridges the gap between abstract care ethics and concrete technical implementations, helping development teams align robotic behavior with the nuanced moral landscape of care environments.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1YLbL86_5xr5QDR7sLRrRLKNbXh-8JuKO
+## 📖 Thesis
 
-## Run Locally
+This project serves as the digital artifact and practical companion to the Master's Thesis:
+**"Bridging the Gap: A Care-Centered Value Sensitive Design Framework for Healthcare Robotics"**
 
-**Prerequisites:**  Node.js
+📄 **[Read the Full Thesis (PDF)](/public/assets/TUD_NWL_Thesis-Final-v2.pdf)**
 
+## 🚀 Getting Started
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+To run this project locally for development:
+
+### Prerequisites
+
+- Node.js (v18 or newer)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/demeesterroel/0ccvsd.git
+   cd 0ccvsd
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) with your browser.
+
+## 🛠️ Built With
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Language**: TypeScript
+- **Deployment**: Vercel
+
+---
+*Developed by Roeland De Meester for TU Delft.*
