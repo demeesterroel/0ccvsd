@@ -141,7 +141,7 @@ const Phase1StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => voi
         >
           <div className="flex items-center gap-6">
             <div className="size-14 border border-white/30 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl">trending_flat</span>
+              <span className="material-symbols-outlined text-3xl">{parseInt(stepNum) === 6 ? 'architecture' : 'explore'}</span>
             </div>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-60">{parseInt(stepNum) === 6 ? 'Phase II Transition' : 'Next Step'}</p>
