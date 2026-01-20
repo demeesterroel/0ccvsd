@@ -101,6 +101,37 @@ export default function Phase1StepContent({ stepId }: { stepId: string }) {
                         "{step.details}"
                     </p>
 
+
+
+                    <div className="p-6 bg-ink text-white rounded shadow-xl">
+                        <h4 className="font-bold mb-3 flex items-center gap-2 text-xs uppercase tracking-widest">
+                            <span className="material-symbols-outlined text-base">info</span>
+                            Phase I Requirement
+                        </h4>
+                        <p className="text-sm opacity-90 leading-relaxed">
+                            Every finding in this stage forms the <strong>Empirical Baseline</strong> for the technical stack choices in Phase II.
+                        </p>
+                    </div>
+                </div>
+                <div className="hand-drawn-border bg-white p-8">
+                    <div className="flex items-center gap-4 mb-6">
+                        <div className="size-12 rounded-full border-2 border-ink flex items-center justify-center bg-cream">
+                            <span className="material-symbols-outlined">{step.icon}</span>
+                        </div>
+                        <div>
+                            <h4 className="font-bold">{step.metricTitle}</h4>
+                            <p className="text-xs text-ink-light uppercase">Empirical Output</p>
+                        </div>
+                    </div>
+                    <ul className="space-y-4">
+                        {step.metrics.map((m, i) => (
+                            <li key={i} className="flex gap-3 items-start">
+                                <span className="material-symbols-outlined text-ink mt-0.5">check_circle</span>
+                                <div className="text-sm font-medium">{m}</div>
+                            </li>
+                        ))}
+                    </ul>
+
                     {'image' in step && (
                         <>
                             <div
@@ -150,35 +181,6 @@ export default function Phase1StepContent({ stepId }: { stepId: string }) {
                             )}
                         </>
                     )}
-
-                    <div className="p-6 bg-ink text-white rounded shadow-xl">
-                        <h4 className="font-bold mb-3 flex items-center gap-2 text-xs uppercase tracking-widest">
-                            <span className="material-symbols-outlined text-base">info</span>
-                            Phase I Requirement
-                        </h4>
-                        <p className="text-sm opacity-90 leading-relaxed">
-                            Every finding in this stage forms the <strong>Empirical Baseline</strong> for the technical stack choices in Phase II.
-                        </p>
-                    </div>
-                </div>
-                <div className="hand-drawn-border bg-white p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                        <div className="size-12 rounded-full border-2 border-ink flex items-center justify-center bg-cream">
-                            <span className="material-symbols-outlined">{step.icon}</span>
-                        </div>
-                        <div>
-                            <h4 className="font-bold">{step.metricTitle}</h4>
-                            <p className="text-xs text-ink-light uppercase">Empirical Output</p>
-                        </div>
-                    </div>
-                    <ul className="space-y-4">
-                        {step.metrics.map((m, i) => (
-                            <li key={i} className="flex gap-3 items-start">
-                                <span className="material-symbols-outlined text-ink mt-0.5">check_circle</span>
-                                <div className="text-sm font-medium">{m}</div>
-                            </li>
-                        ))}
-                    </ul>
                 </div>
             </section>
 
