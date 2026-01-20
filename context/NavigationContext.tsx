@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { PageId } from '../types';
+
 
 interface NavigationContextType {
     visitedPages: Set<string>;
