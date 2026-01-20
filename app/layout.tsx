@@ -2,6 +2,8 @@ import './globals.css';
 import { NavigationProvider } from '../context/NavigationContext';
 import Sidebar from '../components/Sidebar';
 
+import MobileMenuTrigger from '../components/MobileMenuTrigger';
+
 export const metadata = {
     title: 'CCVSD Guidebook',
     description: 'Care-Centered Value Sensitive Design Framework',
@@ -21,6 +23,7 @@ export default function RootLayout({
             <body className="font-serif bg-cream text-ink antialiased flex flex-col md:flex-row min-h-screen">
                 <NavigationProvider>
                     <Sidebar />
+                    <MobileMenuTrigger />
                     <main className="flex-1 transition-all duration-300 transform">
                         {children}
                     </main>
