@@ -2,6 +2,9 @@ import HeroCycle from "@/components/HeroCycle";
 import PhaseSection from "@/components/PhaseSection";
 import Image from "next/image";
 import { Download } from "lucide-react";
+import DiagramPhase1 from "@/components/diagrams/DiagramPhase1";
+import DiagramPhase2 from "@/components/diagrams/DiagramPhase2";
+import DiagramPhase3 from "@/components/diagrams/DiagramPhase3";
 
 export default function Home() {
   return (
@@ -13,6 +16,7 @@ export default function Home() {
         id="exploration"
         title="Phase I: Exploration"
         mainImageSrc="/assets/phase_1_ines.png"
+        visualization={<DiagramPhase1 />}
         color="#8CBCE8" // Thesis Blue
         steps={[
           {
@@ -61,6 +65,7 @@ export default function Home() {
         id="development"
         title="Phase II: Development"
         mainImageSrc="/assets/phase2_ines.png"
+        visualization={<DiagramPhase2 />}
         color="#E88C8C" // Thesis Red
         steps={[
           {
@@ -95,6 +100,7 @@ export default function Home() {
         id="integration"
         title="Phase III: Integration"
         mainImageSrc="/assets/phase3_ines.png"
+        visualization={<DiagramPhase3 />}
         color="#8CE8A6" // Thesis Green
         steps={[
           {
