@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useNavigation } from '../context/NavigationContext';
@@ -66,6 +66,7 @@ const stepData = {
 export default function Phase1StepContent({ stepId }: { stepId: string }) {
     const router = useRouter();
     const { markVisited } = useNavigation();
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
     useEffect(() => {
         if (stepId) {
@@ -100,15 +101,53 @@ export default function Phase1StepContent({ stepId }: { stepId: string }) {
                     </p>
 
                     {'image' in step && (
-                        <div className="rounded-lg overflow-hidden border-2 border-ink shadow-lg my-6">
-                            <Image
-                                src={(step as any).image}
-                                alt={step.title}
-                                width={800}
-                                height={600}
-                                className="w-full h-auto bg-white"
-                            />
-                        </div>
+                        <>
+                            <div
+                                className="rounded-lg overflow-hidden border-2 border-ink shadow-lg my-6 cursor-pointer hover:opacity-90 transition-opacity"
+                                onClick={() => setIsImageModalOpen(true)}
+                            >
+                                <Image
+                                    src={(step as any).image}
+                                    alt={step.title}
+                                    width={800}
+                                    height={600}
+                                    className="w-full h-auto bg-white"
+                                />
+                                <div className="bg-ink/5 p-2 text-center text-[10px] uppercase font-bold text-ink/60 flex items-center justify-center gap-1">
+                                    <span className="material-symbols-outlined text-sm">zoom_in</span>
+                                    Click to enlarge
+                                </div>
+                            </div>
+
+                            {isImageModalOpen && (
+                                <div
+                                    className="fixed inset-0 z-[100] bg-ink/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-10"
+                                    onClick={() => setIsImageModalOpen(false)}
+                                >
+                                    <div className="relative max-w-7xl max-h-full w-full flex flex-col items-center">
+                                        <button
+                                            onClick={() => setIsImageModalOpen(false)}
+                                            className="absolute -top-12 right-0 text-white hover:text-accent transition-colors flex items-center gap-2"
+                                        >
+                                            <span className="text-xs font-bold uppercase tracking-widest">Close</span>
+                                            <span className="material-symbols-outlined text-3xl">close</span>
+                                        </button>
+                                        <div
+                                            className="bg-white p-2 rounded shadow-2xl overflow-hidden"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <Image
+                                                src={(step as any).image}
+                                                alt={step.title}
+                                                width={1600}
+                                                height={1200}
+                                                className="w-auto h-auto max-h-[85vh] object-contain"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </>
                     )}
 
                     <div className="p-6 bg-ink text-white rounded shadow-xl">
