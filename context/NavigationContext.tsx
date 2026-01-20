@@ -1,5 +1,6 @@
+"use client";
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import { PageId } from '../types';
 
 interface NavigationContextType {
@@ -8,6 +9,7 @@ interface NavigationContextType {
     isSidebarOpen: boolean;
     setIsSidebarOpen: (isOpen: boolean) => void;
     markVisited: (id: string) => void;
+    resetProgress: () => void;
 }
 
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
@@ -23,12 +25,12 @@ const TOTAL_PAGES = [
 export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [visitedPages, setVisitedPages] = useState<Set<string>>(new Set(['intro']));
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const location = useLocation();
+    const pathname = usePathname();
 
     useEffect(() => {
         // Close sidebar on route change
         setIsSidebarOpen(false);
-    }, [location.pathname]);
+    }, [pathname]);
 
     const markVisited = (id: string) => {
         setVisitedPages(prev => {
@@ -39,10 +41,14 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         });
     };
 
-    const progress = Math.round((visitedPages.size / TOTAL_PAGES.length) * 100);
+    const resetProgress = () => {
+        setVisitedPages(new Set(['intro']));
+    };
+
+    const progress = Math.round((TOTAL_PAGES.filter(page => visitedPages.has(page)).length / TOTAL_PAGES.length) * 100);
 
     return (
-        <NavigationContext.Provider value={{ visitedPages, progress, isSidebarOpen, setIsSidebarOpen, markVisited }}>
+        <NavigationContext.Provider value={{ visitedPages, progress, isSidebarOpen, setIsSidebarOpen, markVisited, resetProgress }}>
             {children}
         </NavigationContext.Provider>
     );

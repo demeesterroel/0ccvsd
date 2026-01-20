@@ -1,6 +1,9 @@
 
+'use client';
+
 import React from 'react';
-import { NavLink as RouterNavLink, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useNavigation } from '../context/NavigationContext';
 
 const SectionLabel = ({ children }: React.PropsWithChildren<{}>) => (
@@ -10,21 +13,24 @@ const SectionLabel = ({ children }: React.PropsWithChildren<{}>) => (
 );
 
 const Sidebar: React.FC = () => {
-  const { progress, isSidebarOpen, setIsSidebarOpen } = useNavigation();
-  const location = useLocation();
+  const { progress, isSidebarOpen, setIsSidebarOpen, resetProgress } = useNavigation();
+  const pathname = usePathname();
 
-  const NavLink = ({ to, icon, label, sub = false }: { to: string, icon?: string, label: string, sub?: boolean }) => (
-    <RouterNavLink
-      to={to}
-      className={({ isActive }) => `flex items-center gap-3 px-4 py-2 rounded transition-all text-sm w-full text-left
+  const NavLink = ({ to, icon, label, sub = false }: { to: string, icon?: string, label: string, sub?: boolean }) => {
+    const isActive = pathname === to;
+    return (
+      <Link
+        href={to}
+        className={`flex items-center gap-3 px-4 py-2 rounded transition-all text-sm w-full text-left
         ${isActive ? 'bg-ink text-white shadow-lg' : 'hover:bg-black/5 text-ink-light'}
         ${sub ? 'pl-10 text-[11px] font-medium' : ''}
       `}
-    >
-      {icon && <span className="material-symbols-outlined text-xl">{icon}</span>}
-      <span>{label}</span>
-    </RouterNavLink>
-  );
+      >
+        {icon && <span className="material-symbols-outlined text-xl">{icon}</span>}
+        <span>{label}</span>
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -67,7 +73,7 @@ const Sidebar: React.FC = () => {
             <SectionLabel>The 3 Phases</SectionLabel>
             <NavLink to="/overview" icon="view_timeline" label="Phase Overview" />
             <NavLink to="/phase1" icon="explore" label="Phase I: Exploration" />
-            {(location.pathname.startsWith('/phase1') || (isSidebarOpen && location.pathname === '/phase1')) && (
+            {(pathname.startsWith('/phase1') || (isSidebarOpen && pathname === '/phase1')) && (
               <div className="flex flex-col gap-0.5 border-l border-ink/10 ml-6 mt-1">
                 <NavLink to="/phase1/step/1" label="1. Context of Care" sub />
                 <NavLink to="/phase1/step/2" label="2. Stakeholder Map" sub />
@@ -79,7 +85,7 @@ const Sidebar: React.FC = () => {
             )}
 
             <NavLink to="/phase2" icon="architecture" label="Phase II: Development" />
-            {(location.pathname.startsWith('/phase2') || (isSidebarOpen && location.pathname === '/phase2')) && (
+            {(pathname.startsWith('/phase2') || (isSidebarOpen && pathname === '/phase2')) && (
               <div className="flex flex-col gap-0.5 border-l border-ink/10 ml-6 mt-1">
                 <NavLink to="/phase2/step/1" label="1. Analysis" sub />
                 <NavLink to="/phase2/step/2" label="2. Synthesis" sub />
@@ -90,7 +96,7 @@ const Sidebar: React.FC = () => {
             )}
 
             <NavLink to="/phase3" icon="rule" label="Phase III: Integration" />
-            {(location.pathname.startsWith('/phase3') || (isSidebarOpen && location.pathname === '/phase3')) && (
+            {(pathname.startsWith('/phase3') || (isSidebarOpen && pathname === '/phase3')) && (
               <div className="flex flex-col gap-0.5 border-l border-ink/10 ml-6 mt-1">
                 <NavLink to="/phase3/step/1" label="1. Scenario Deployment" sub />
                 <NavLink to="/phase3/step/2" label="2. Qualitative Friction" sub />
@@ -109,7 +115,16 @@ const Sidebar: React.FC = () => {
             <div className="p-4 border border-ink/10 rounded">
               <div className="flex justify-between items-end mb-2">
                 <p className="text-[10px] font-bold uppercase">Guidebook Progress</p>
-                <p className="text-[10px] font-bold font-mono">{progress}%</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-[10px] font-bold font-mono">{progress}%</p>
+                  <button
+                    onClick={resetProgress}
+                    title="Reset progress"
+                    className="text-ink/40 hover:text-accent transition-colors flex items-center"
+                  >
+                    <span className="material-symbols-outlined text-[10px] leading-none">refresh</span>
+                  </button>
+                </div>
               </div>
               <div className="w-full bg-ink/5 h-1.5 rounded-full overflow-hidden">
                 <div

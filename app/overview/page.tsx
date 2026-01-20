@@ -1,9 +1,11 @@
+'use client';
+
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useNavigation } from '../context/NavigationContext';
+import { useRouter } from 'next/navigation';
+import { useNavigation } from '../../context/NavigationContext';
 
 const GeneralPhaseOverviewPage: React.FC = () => {
-    const navigate = useNavigate();
+    const router = useRouter();
     const { markVisited } = useNavigation();
 
     useEffect(() => {
@@ -62,7 +64,7 @@ const GeneralPhaseOverviewPage: React.FC = () => {
                         <h4 className="text-sm font-bold uppercase tracking-widest text-ink/50 mb-4">{phase.title}</h4>
                         <p className="text-sm text-ink-light leading-relaxed mb-6 flex-grow">{phase.detail}</p>
                         <button
-                            onClick={() => navigate(phase.path)}
+                            onClick={() => router.push(phase.path)}
                             className="text-[10px] font-bold uppercase tracking-widest border-b border-ink/20 hover:border-ink self-start pb-1"
                         >
                             Explore Phase
@@ -73,14 +75,14 @@ const GeneralPhaseOverviewPage: React.FC = () => {
 
             <footer className="border-t border-ink pt-16 flex flex-col md:flex-row gap-8">
                 <button
-                    onClick={() => navigate('/philosophy')}
+                    onClick={() => router.push('/philosophy')}
                     className="flex-1 p-8 border-2 border-ink bg-white/50 hover:bg-ink hover:text-white transition-all group text-left"
                 >
                     <p className="text-[10px] font-bold uppercase tracking-widest mb-2 opacity-60">Previous Section</p>
                     <h4 className="text-xl font-bold">Philosophy</h4>
                 </button>
                 <button
-                    onClick={() => navigate('/phase1')}
+                    onClick={() => router.push('/phase1')}
                     className="flex-1 p-8 border-2 border-ink hover:bg-ink hover:text-white transition-all group text-left"
                 >
                     <p className="text-[10px] font-bold uppercase tracking-widest mb-2 opacity-60">Begin the Process</p>

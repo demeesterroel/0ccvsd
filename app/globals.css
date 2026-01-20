@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-serif bg-cream text-ink antialiased;
+    }
+}
+
+
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.hand-drawn-border {
+    border: 2px solid #111111;
+    box-shadow: 4px 4px 0px 0px #111111;
+}
+
+.step-number-outline {
+    -webkit-text-stroke: 1px #111111;
+    color: transparent;
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .page-break {
+        break-after: page;
+        page-break-after: always;
+    }
+
+    body {
+        background-color: white !important;
+    }
+
+    main {
+        overflow: visible !important;
+        height: auto !important;
+    }
+
+    aside,
+    header {
+        display: none !important;
+    }
+
+    .hand-drawn-border {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+    }
+}
