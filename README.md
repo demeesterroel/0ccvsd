@@ -17,7 +17,7 @@ To run this project locally for development:
 
 ### Prerequisites
 
-- Node.js (v18 or newer)
+- Node.js (v20 or newer)
 - npm or yarn
 
 ### Installation
