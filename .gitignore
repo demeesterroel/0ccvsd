@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 _backup_v1
+
+# Next.js
+.next
