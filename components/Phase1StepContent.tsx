@@ -50,7 +50,8 @@ const stepData = {
         details: 'In this step, we take a Tier 1 value like "Privacy" and translate it into a Tier 2 principle: "The robot must always knock and pause before entering a patient room."',
         metricTitle: 'Value Translation',
         metrics: ['Tier 1: Moral Values', 'Tier 2: Design Principles', 'Contextual Social Norms'],
-        icon: 'account_tree'
+        icon: 'account_tree',
+        image: '/assets/prospective_value_hierarchy.png'
     },
     '6': {
         title: 'Design Requirements',
