@@ -1,8 +1,15 @@
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '../context/NavigationContext';
 
-import React from 'react';
-import { PageId } from '../types';
+const PhilosophyPage: React.FC<{ onNavigate?: any }> = () => {
+  const navigate = useNavigate();
+  const { markVisited } = useNavigation();
 
-const PhilosophyPage: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavigate }) => {
+  useEffect(() => {
+    markVisited('philosophy');
+  }, []);
+
   const elements = [
     { num: '01', title: 'Attentiveness', icon: 'visibility', desc: 'Recognizing needs of others. Translated to sensor fidelity and context awareness.' },
     { num: '02', title: 'Responsibility', icon: 'handshake', desc: 'Taking on the burden of care. Defining accountability structures and safety protocols.' },
@@ -44,13 +51,16 @@ const PhilosophyPage: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavi
       </section>
 
       <footer className="border-t border-ink pt-16 flex flex-col md:flex-row gap-8">
-        <button onClick={() => onNavigate('intro')} className="flex-1 p-8 border-2 border-ink bg-white/50 hover:bg-ink hover:text-white transition-all group text-left">
+        <button onClick={() => navigate('/')} className="flex-1 p-8 border-2 border-ink bg-white/50 hover:bg-ink hover:text-white transition-all group text-left">
           <p className="text-[10px] font-bold uppercase tracking-widest mb-2 opacity-60">Previous Section</p>
           <h4 className="text-xl font-bold">Introduction</h4>
         </button>
-        <button onClick={() => onNavigate('phase1-overview')} className="flex-1 p-8 border-2 border-ink hover:bg-ink hover:text-white transition-all group text-left">
-          <p className="text-[10px] font-bold uppercase tracking-widest mb-2 opacity-60">Next Phase</p>
-          <h4 className="text-xl font-bold">Phase I: Exploration</h4>
+        <button onClick={() => navigate('/overview')} className="flex-1 p-8 border-2 border-ink hover:bg-ink hover:text-white transition-all group text-left">
+          <p className="text-[10px] font-bold uppercase tracking-widest mb-2 opacity-60">Next Section</p>
+          <h4 className="text-xl font-bold flex items-center justify-between">
+            Structure Overview
+            <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform">view_timeline</span>
+          </h4>
         </button>
       </footer>
     </div>

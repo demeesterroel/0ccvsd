@@ -1,6 +1,5 @@
-
 import React, { useEffect } from 'react';
-import { PageId } from '../types';
+import { useNavigate } from 'react-router-dom';
 import IntroPage from './IntroPage';
 import PhilosophyPage from './PhilosophyPage';
 import PhaseOverviewPage from './PhaseOverviewPage';
@@ -9,7 +8,9 @@ import Phase2StepPage from './Phase2StepPage';
 import Phase3StepPage from './Phase3StepPage';
 import GlossaryPage from './GlossaryPage';
 
-const ExportView: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavigate }) => {
+const ExportView: React.FC<{ onNavigate?: any }> = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Small delay to ensure all content is rendered before triggering print
     const timer = setTimeout(() => {
@@ -35,7 +36,7 @@ const ExportView: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavigate
           <span className="material-symbols-outlined text-6xl">robot_2</span>
         </div>
         <h1 className="text-7xl font-bold uppercase tracking-tighter mb-8 leading-[0.9]">
-          Care-Centered <br/> Value Sensitive <br/> Design
+          Care-Centered <br /> Value Sensitive <br /> Design
         </h1>
         <div className="w-48 h-1.5 bg-ink mb-8"></div>
         <p className="text-2xl italic font-light max-w-xl mb-24 opacity-70">
@@ -60,60 +61,60 @@ const ExportView: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavigate
           ))}
         </div>
         <div className="mt-32 p-12 bg-cream/50 border border-ink/10">
-            <h3 className="font-bold mb-4 uppercase text-xs tracking-widest">Instructions</h3>
-            <p className="text-sm italic opacity-70">This document is designed as a sequential methodology. For best results, engineers should proceed from Phase I exploration before making technical commitments in Phase II.</p>
+          <h3 className="font-bold mb-4 uppercase text-xs tracking-widest">Instructions</h3>
+          <p className="text-sm italic opacity-70">This document is designed as a sequential methodology. For best results, engineers should proceed from Phase I exploration before making technical commitments in Phase II.</p>
         </div>
       </section>
 
       {/* 3. Intro */}
       <div className="page-break no-prev-next">
-        <IntroPage onNavigate={() => {}} />
+        <IntroPage onNavigate={() => { }} />
       </div>
 
       {/* 4. Philosophy */}
       <div className="page-break no-prev-next">
-        <PhilosophyPage onNavigate={() => {}} />
+        <PhilosophyPage onNavigate={() => { }} />
       </div>
 
       {/* 5. Phase I Overview & Steps */}
       <div className="page-break no-prev-next">
-        <PhaseOverviewPage phase={1} onNavigate={() => {}} />
+        <PhaseOverviewPage phase={1} onNavigate={() => { }} />
       </div>
       {['p1-s1', 'p1-s2', 'p1-s3', 'p1-s4', 'p1-s5', 'p1-s6'].map(step => (
         <div key={step} className="page-break no-prev-next">
-          <Phase1StepPage stepId={step} onNavigate={() => {}} />
+          <Phase1StepPage stepId={step} onNavigate={() => { }} />
         </div>
       ))}
 
       {/* 6. Phase II Overview & Steps */}
       <div className="page-break no-prev-next">
-        <PhaseOverviewPage phase={2} onNavigate={() => {}} />
+        <PhaseOverviewPage phase={2} onNavigate={() => { }} />
       </div>
       {['p2-s1', 'p2-s2', 'p2-s3', 'p2-s4', 'p2-s5'].map(step => (
         <div key={step} className="page-break no-prev-next">
-          <Phase2StepPage stepId={step} onNavigate={() => {}} />
+          <Phase2StepPage stepId={step} onNavigate={() => { }} />
         </div>
       ))}
 
       {/* 7. Phase III Overview & Steps */}
       <div className="page-break no-prev-next">
-        <PhaseOverviewPage phase={3} onNavigate={() => {}} />
+        <PhaseOverviewPage phase={3} onNavigate={() => { }} />
       </div>
       {['p3-s1', 'p3-s2', 'p3-s3', 'p3-s4', 'p3-s5'].map(step => (
         <div key={step} className="page-break no-prev-next">
-          <Phase3StepPage stepId={step} onNavigate={() => {}} />
+          <Phase3StepPage stepId={step} onNavigate={() => { }} />
         </div>
       ))}
 
       {/* 8. Glossary */}
       <div className="page-break no-prev-next">
-        <GlossaryPage onNavigate={() => {}} />
+        <GlossaryPage onNavigate={() => { }} />
       </div>
 
       {/* Return Button (Only visible on screen) */}
       <div className="no-print fixed bottom-8 right-8 z-50">
-        <button 
-          onClick={() => onNavigate('pdf-guide')}
+        <button
+          onClick={() => navigate('/pdf-guide')}
           className="bg-ink text-white px-8 py-4 font-bold shadow-2xl flex items-center gap-4 hover:scale-105 transition-transform"
         >
           <span className="material-symbols-outlined">close</span>

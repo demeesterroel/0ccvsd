@@ -1,8 +1,16 @@
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '../context/NavigationContext';
 
-import React from 'react';
-import { PageId } from '../types';
+// Legacy props support for step-by-step refactoring, optional
+const IntroPage: React.FC<{ onNavigate?: any }> = () => {
+  const navigate = useNavigate();
+  const { markVisited } = useNavigation();
 
-const IntroPage: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavigate }) => {
+  useEffect(() => {
+    markVisited('intro');
+  }, []);
+
   return (
     <div className="max-w-5xl mx-auto px-6 md:px-16 py-10 md:py-20">
       <header className="mb-16">
@@ -63,7 +71,7 @@ const IntroPage: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavigate 
       </section>
 
       <footer className="border-t border-ink pt-16 flex flex-col md:flex-row gap-8 no-print">
-        <button onClick={() => onNavigate('pdf-guide')} className="flex-1 p-8 border-2 border-ink hover:bg-ink hover:text-white transition-all group text-left">
+        <button onClick={() => navigate('/pdf-guide')} className="flex-1 p-8 border-2 border-ink hover:bg-ink hover:text-white transition-all group text-left">
           <p className="text-[10px] font-bold uppercase tracking-widest mb-2 opacity-60">Reference</p>
           <h4 className="text-2xl font-bold mb-4 flex items-center justify-between">
             Download PDF
@@ -71,7 +79,7 @@ const IntroPage: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavigate 
           </h4>
           <p className="text-sm opacity-80 group-hover:opacity-100">Get the full CCVSD framework document for offline reference.</p>
         </button>
-        <button onClick={() => onNavigate('philosophy')} className="flex-1 p-8 border-2 border-ink hover:bg-ink hover:text-white transition-all group text-left">
+        <button onClick={() => navigate('/philosophy')} className="flex-1 p-8 border-2 border-ink hover:bg-ink hover:text-white transition-all group text-left">
           <p className="text-[10px] font-bold uppercase tracking-widest mb-2 opacity-60">Begin the Journey</p>
           <h4 className="text-2xl font-bold mb-4 flex items-center justify-between">
             The Philosophy

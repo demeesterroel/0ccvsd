@@ -1,8 +1,15 @@
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '../context/NavigationContext';
 
-import React from 'react';
-import { PageId } from '../types';
+const GlossaryPage: React.FC<{ onNavigate?: any }> = () => {
+  const navigate = useNavigate();
+  const { markVisited } = useNavigation();
 
-const GlossaryPage: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNavigate }) => {
+  useEffect(() => {
+    markVisited('glossary');
+  }, []);
+
   const abbreviations = {
     ethics: [
       { abbr: 'CCVSD', def: 'Care Centered Value Sensitive Design' },
@@ -106,7 +113,7 @@ const GlossaryPage: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNaviga
                   <td className="py-3 px-4 text-sm italic">{item.def}</td>
                 </tr>
               ))}
-              
+
               {/* II. Robotics & Engineering */}
               <tr className="bg-ink/5 border-b border-ink/10">
                 <td colSpan={2} className="py-3 px-4 font-bold italic text-sm mt-4">II. Robotics & Engineering</td>
@@ -133,15 +140,32 @@ const GlossaryPage: React.FC<{ onNavigate: (id: PageId) => void }> = ({ onNaviga
         ))}
       </div>
 
-      <footer className="mt-20 pt-16 border-t border-ink flex justify-between items-center">
-        <button onClick={() => onNavigate('intro')} className="p-8 border-2 border-ink hover:bg-ink hover:text-white transition-all text-left max-w-xs">
-          <p className="text-[10px] font-bold uppercase tracking-widest mb-2 opacity-60">Return to foundation</p>
-          <h4 className="text-xl font-bold">Introduction</h4>
+      <footer className="mt-20 pt-16 border-t border-ink flex flex-col md:flex-row gap-8">
+        <button
+          onClick={() => navigate('/phase3/step/5')}
+          className="flex-1 p-8 border-2 border-ink bg-white hover:bg-cream transition-all group flex items-center gap-6"
+        >
+          <span className="material-symbols-outlined text-4xl group-hover:-translate-x-2 transition-transform">arrow_back</span>
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-60">Previous Step</p>
+            <h4 className="text-xl font-bold">Bifurcated Guides</h4>
+          </div>
         </button>
-        <div className="text-right opacity-30">
-          <p className="text-[10px] font-bold uppercase tracking-widest">Total Terms: {terms.length + abbreviations.ethics.length + abbreviations.robotics.length}</p>
-          <p className="text-[10px] font-bold uppercase tracking-widest">v1.1.0 Methodology Update</p>
-        </div>
+        <button
+          onClick={() => navigate('/pdf-guide')}
+          className="flex-[2] p-8 border-2 border-ink bg-ink text-white hover:bg-neutral-800 transition-all group flex items-center justify-between"
+        >
+          <div className="flex items-center gap-6">
+            <div className="size-14 border border-white/30 flex items-center justify-center">
+              <span className="material-symbols-outlined text-3xl">picture_as_pdf</span>
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-60">Next Section</p>
+              <h4 className="text-2xl font-bold italic">PDF Guide</h4>
+            </div>
+          </div>
+          <span className="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
+        </button>
       </footer>
     </div>
   );

@@ -1,8 +1,15 @@
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '../context/NavigationContext';
 
-import React from 'react';
-import { PageId } from '../types';
+const Phase2StepPage: React.FC<{ stepId: string, onNavigate?: any }> = ({ stepId }) => {
+  const navigate = useNavigate();
+  const { markVisited } = useNavigation();
 
-const Phase2StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => void }> = ({ stepId, onNavigate }) => {
+  useEffect(() => {
+    markVisited(stepId);
+  }, [stepId]);
+
   const stepData = {
     'p2-s1': {
       title: "Analysis",
@@ -104,7 +111,7 @@ const Phase2StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => voi
         <button
           onClick={() => {
             const prev = parseInt(stepNum) - 1;
-            onNavigate(prev > 0 ? `p2-s${prev}` as PageId : 'phase2-overview');
+            navigate(prev > 0 ? `/phase2/step/${prev}` : '/phase2');
           }}
           className="flex-1 p-8 border-2 border-ink bg-white hover:bg-cream transition-all group flex items-center gap-6"
         >
@@ -118,16 +125,16 @@ const Phase2StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => voi
           onClick={() => {
             const next = parseInt(stepNum) + 1;
             if (next <= 5) {
-              onNavigate(`p2-s${next}` as PageId);
+              navigate(`/phase2/step/${next}`);
             } else {
-              onNavigate('phase3-overview');
+              navigate('/phase3');
             }
           }}
           className="flex-[2] p-8 border-2 border-ink bg-ink text-white hover:bg-neutral-800 transition-all group flex items-center justify-between"
         >
           <div className="flex items-center gap-6">
             <div className="size-14 border border-white/30 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl">terminal</span>
+              <span className="material-symbols-outlined text-3xl">{parseInt(stepNum) === 5 ? 'rule' : 'architecture'}</span>
             </div>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-60">{parseInt(stepNum) === 5 ? 'Phase III Transition' : 'Next Step'}</p>

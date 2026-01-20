@@ -1,8 +1,15 @@
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '../context/NavigationContext';
 
-import React from 'react';
-import { PageId } from '../types';
+const Phase1StepPage: React.FC<{ stepId: string, onNavigate?: any }> = ({ stepId }) => {
+  const navigate = useNavigate();
+  const { markVisited } = useNavigation();
 
-const Phase1StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => void }> = ({ stepId, onNavigate }) => {
+  useEffect(() => {
+    markVisited(stepId);
+  }, [stepId]);
+
   const stepData = {
     'p1-s1': {
       title: 'Context of Care Practice',
@@ -118,7 +125,7 @@ const Phase1StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => voi
         <button
           onClick={() => {
             const prev = parseInt(stepNum) - 1;
-            onNavigate(prev > 0 ? `p1-s${prev}` as PageId : 'phase1-overview');
+            navigate(prev > 0 ? `/phase1/step/${prev}` : '/phase1');
           }}
           className="flex-1 p-8 border-2 border-ink bg-white hover:bg-cream transition-all group flex items-center gap-6"
         >
@@ -132,9 +139,9 @@ const Phase1StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => voi
           onClick={() => {
             const next = parseInt(stepNum) + 1;
             if (next <= 6) {
-              onNavigate(`p1-s${next}` as PageId);
+              navigate(`/phase1/step/${next}`);
             } else {
-              onNavigate('phase2-overview');
+              navigate('/phase2');
             }
           }}
           className="flex-[2] p-8 border-2 border-ink bg-ink text-white hover:bg-neutral-800 transition-all group flex items-center justify-between"
