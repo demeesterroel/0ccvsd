@@ -8,7 +8,7 @@ export default function MobileMenuTrigger() {
     return (
         <button
             onClick={() => setIsSidebarOpen(true)}
-            className="fixed top-4 right-4 z-40 md:hidden p-2 bg-white/80 backdrop-blur border border-ink/10 rounded-full shadow-sm text-ink hover:bg-white hover:shadow-md transition-all"
+            className="fixed top-4 right-4 z-[60] md:hidden p-3 bg-ink text-white rounded-full shadow-lg hover:bg-black transition-all flex items-center justify-center"
             aria-label="Open menu"
         >
             <span className="material-symbols-outlined text-2xl">menu</span>
