@@ -1,4 +1,3 @@
-import React from 'react';
 import Phase2StepContent from '../../../../components/Phase2StepContent';
 
 export async function generateStaticParams() {
