@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useNavigation } from '../context/NavigationContext';
 
 const stepData = {
@@ -21,7 +22,8 @@ const stepData = {
         details: 'We go beyond "User" to "Actor". A stakeholder might be the patient (Direct), the night-shift nurse (Direct), or even the visiting family member (Indirect).',
         metricTitle: 'Stakeholder Roles',
         metrics: ['Primary Care Recipients', 'Secondary Professional Staff', 'Indirect/Tertiary Environmental Actors'],
-        icon: 'groups'
+        icon: 'groups',
+        image: '/assets/stakeholder_map.png'
     },
     '3': {
         title: 'Value Analysis',
@@ -96,6 +98,19 @@ export default function Phase1StepContent({ stepId }: { stepId: string }) {
                     <p className="text-lg leading-relaxed italic">
                         "{step.details}"
                     </p>
+
+                    {'image' in step && (
+                        <div className="rounded-lg overflow-hidden border-2 border-ink shadow-lg my-6">
+                            <Image
+                                src={(step as any).image}
+                                alt={step.title}
+                                width={800}
+                                height={600}
+                                className="w-full h-auto bg-white"
+                            />
+                        </div>
+                    )}
+
                     <div className="p-6 bg-ink text-white rounded shadow-xl">
                         <h4 className="font-bold mb-3 flex items-center gap-2 text-xs uppercase tracking-widest">
                             <span className="material-symbols-outlined text-base">info</span>
