@@ -113,24 +113,27 @@ export default function Phase1StepContent({ stepId }: { stepId: string }) {
                         </p>
                     </div>
                 </div>
-                <div className="hand-drawn-border bg-white p-8">
-                    <div className="flex items-center gap-4 mb-6">
-                        <div className="size-12 rounded-full border-2 border-ink flex items-center justify-center bg-cream">
-                            <span className="material-symbols-outlined">{step.icon}</span>
+                <div>
+                    <div className="hand-drawn-border bg-white p-8">
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className="size-12 rounded-full border-2 border-ink flex items-center justify-center bg-cream">
+                                <span className="material-symbols-outlined">{step.icon}</span>
+                            </div>
+                            <div>
+                                <h4 className="font-bold">{step.metricTitle}</h4>
+                                <p className="text-xs text-ink-light uppercase">Empirical Output</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 className="font-bold">{step.metricTitle}</h4>
-                            <p className="text-xs text-ink-light uppercase">Empirical Output</p>
-                        </div>
+                        <ul className="space-y-4">
+                            {step.metrics.map((m, i) => (
+                                <li key={i} className="flex gap-3 items-start">
+                                    <span className="material-symbols-outlined text-ink mt-0.5">check_circle</span>
+                                    <div className="text-sm font-medium">{m}</div>
+                                </li>
+                            ))}
+                        </ul>
+
                     </div>
-                    <ul className="space-y-4">
-                        {step.metrics.map((m, i) => (
-                            <li key={i} className="flex gap-3 items-start">
-                                <span className="material-symbols-outlined text-ink mt-0.5">check_circle</span>
-                                <div className="text-sm font-medium">{m}</div>
-                            </li>
-                        ))}
-                    </ul>
 
                     {'image' in step && (
                         <>
@@ -181,8 +184,9 @@ export default function Phase1StepContent({ stepId }: { stepId: string }) {
                             )}
                         </>
                     )}
+
                 </div>
-            </section>
+            </section >
 
             <footer className="border-t-2 border-ink pt-12 flex flex-col md:flex-row gap-8">
                 <button
@@ -221,6 +225,6 @@ export default function Phase1StepContent({ stepId }: { stepId: string }) {
                     <span className="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
                 </button>
             </footer>
-        </div>
+        </div >
     );
 }
