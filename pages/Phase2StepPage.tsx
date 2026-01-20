@@ -101,20 +101,20 @@ const Phase2StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => voi
       </section>
 
       <footer className="border-t-2 border-ink pt-12 flex flex-col md:flex-row gap-8">
-        <button 
+        <button
           onClick={() => {
             const prev = parseInt(stepNum) - 1;
             onNavigate(prev > 0 ? `p2-s${prev}` as PageId : 'phase2-overview');
-          }} 
+          }}
           className="flex-1 p-8 border-2 border-ink bg-white hover:bg-cream transition-all group flex items-center gap-6"
         >
           <span className="material-symbols-outlined text-4xl group-hover:-translate-x-2 transition-transform">arrow_back</span>
           <div>
             <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-60">Previous</p>
-            <h4 className="text-xl font-bold">Step 0{parseInt(stepNum)-1 || '...'}</h4>
+            <h4 className="text-xl font-bold">{parseInt(stepNum) === 1 ? 'Phase II: Development' : `Step 0${parseInt(stepNum) - 1}`}</h4>
           </div>
         </button>
-        <button 
+        <button
           onClick={() => {
             const next = parseInt(stepNum) + 1;
             if (next <= 5) {
@@ -122,7 +122,7 @@ const Phase2StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => voi
             } else {
               onNavigate('phase3-overview');
             }
-          }} 
+          }}
           className="flex-[2] p-8 border-2 border-ink bg-ink text-white hover:bg-neutral-800 transition-all group flex items-center justify-between"
         >
           <div className="flex items-center gap-6">
@@ -131,7 +131,7 @@ const Phase2StepPage: React.FC<{ stepId: string, onNavigate: (id: PageId) => voi
             </div>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-60">{parseInt(stepNum) === 5 ? 'Phase III Transition' : 'Next Step'}</p>
-              <h4 className="text-2xl font-bold italic">{parseInt(stepNum) === 5 ? 'Integration' : `Step 0${parseInt(stepNum)+1}`}</h4>
+              <h4 className="text-2xl font-bold italic">{parseInt(stepNum) === 5 ? 'Integration' : `Step 0${parseInt(stepNum) + 1}`}</h4>
             </div>
           </div>
           <span className="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
